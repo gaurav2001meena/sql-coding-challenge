@@ -2,7 +2,7 @@
                         Coding Challenges: CareerHub, The Job Board              
 */
 
---1 Provide a SQL script that initializes the database for the Job Board scenario “CareerHub”. 
+--1 Provide a SQL script that initializes the database for the Job Board scenario â€œCareerHubâ€. 
 create database CareerHub;
 use CareerHub;
 
@@ -133,7 +133,8 @@ GROUP BY
 
 /*6. Develop an SQL query that retrieves job listings from the "Jobs" table within a specified salary
 range. Allow parameters for the minimum and maximum salary values. Display the job title,
-company name, location, and salary for each matching job.*/
+company name, location, and salary for each matching job.*/
+
 SELECT
     J.JobTitle,
     C.CompanyName,
@@ -202,7 +203,7 @@ UPDATE Applicants
 SET Experience = 5 
 WHERE ApplicantID = 1; 
 
-SELECT DISTINCT
+SELECT 
     A.*
 FROM
     Applicants A
@@ -219,7 +220,7 @@ WHERE
 
 -- 11.Retrieve a list of distinct job titles with salaries between $60,000 and $80,000.
 
-SELECT 
+SELECT DISTINCT
     JobTitle,
     Salary
 FROM
@@ -308,7 +309,9 @@ SELECT
 FROM
     Applicants;
 
---18. Retrieve a list of jobs with titles containing either 'Developer' or 'Engineer'.SELECT
+--18. Retrieve a list of jobs with titles containing either 'Developer' or 'Engineer'.
+
+SELECT
     *
 FROM
     Jobs
@@ -348,16 +351,3 @@ CROSS JOIN
 WHERE
     C.Location = 'Chennai'
     AND A.Experience > 2;
-
-
-
-
-
-
-
-
-
-
-
-
-
