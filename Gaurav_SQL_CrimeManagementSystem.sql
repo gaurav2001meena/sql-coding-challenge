@@ -104,20 +104,19 @@ UPDATE Suspect
 SET SuspectAge=76
 WHERE SuspectID=3;
 
-SELECT VictimID AS PersonID, Name, VictimAge
-FROM Victim
-ORDER BY VictimAge DESC;
-
-SELECT SuspectID AS PersonID, Name, SuspectAge
-FROM Suspect
-ORDER BY SuspectAge DESC;
+with persons as(
+SELECT VictimID AS PersonID, Name, VictimAge as age,type='Victim' FROM Victim
+union
+SELECT SuspectID, Name, SuspectAge,type='Suspect' FROM Suspect)
+select personid,name,age,type from persons
+order by age desc;
 
 --6. Find the average age of persons involved in incidents.
-SELECT AVG(VictimAge) AS VictimsAverageAge
-FROM Victim;
-
-SELECT AVG(SuspectAge) AS SuspectsAverageAge
-FROM Suspect;
+with avg as(
+SELECT VictimAge AS age FROM Victim
+union
+SELECT SuspectAge FROM Suspect)
+select avg(age) as 'Average age ' from avg;
 
 --7. List incident types and their counts, only for open cases.
 SELECT IncidentType , COUNT(CrimeID) AS CountOfOpenCases
@@ -205,7 +204,7 @@ HAVING COUNT(C.CrimeID) > 1;
 SELECT C.*
 FROM Crime C
 LEFT JOIN Suspect S ON C.CrimeID = S.CrimeID
-WHERE S.Name = 'Unknown';
+WHERE S.Name is Null;
 
 
 --18. List all cases where at least one incident is of type 'Homicide' and all other incidents are of type 'Robbery'.
