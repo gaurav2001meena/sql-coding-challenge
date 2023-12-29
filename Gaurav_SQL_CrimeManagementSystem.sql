@@ -166,11 +166,11 @@ HAVING COUNT(*) > 1;
 
 
 --13. List all incidents with suspects whose names also appear as victims in other incidents.
-SELECT C.CrimeID, C.IncidentType, V.VictimID, V.Name AS VictimName, S.SuspectID, S.Name AS SuspectName
+SELECT C.CrimeID,C.IncidentType,C.IncidentDate,S.Name as SuspectName
 FROM Crime C
 JOIN Victim V ON V.CrimeID = C.CrimeID
 JOIN Suspect S ON S.CrimeID = C.CrimeID
-WHERE S.Name IN (SELECT Name FROM Victim WHERE CrimeID <> C.CrimeID AND Name IS NOT NULL);
+where S.Name in(select Name from Victim);
 
 
 
